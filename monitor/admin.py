@@ -5,3 +5,4 @@ from monitor import models
 admin.site.register(models.TwitterUser)
 admin.site.register(models.Tweet)
 admin.site.register(models.TweetResponse)
+admin.site.register(models.Hashtag)

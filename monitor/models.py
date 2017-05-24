@@ -28,13 +28,27 @@ class TwitterUser(models.Model):
             user = api.get_user(self.username)
             tweets = user.timeline(count=200)
             for tweet in tweets:
-                Tweet.objects.create(
+                tweet_obj = Tweet.objects.create(
                     tweet_id=tweet.id, user=self, text=tweet.text,
                     date=tweet.created_at
                 )
+                for hashtag in tweet.entities.get('hashtags'):
+                    tag, created = Hashtag.objects.get_or_create(
+                        name=hashtag.get('text')
+                    )
+                    tweet_obj.hashtags.add(tag.id)
+
             self.update_status(enums.TwitterUserStatusEnum.VALID)
         except TweepError:
             self.update_status(enums.TwitterUserStatusEnum.INVALID)
+
+
+class Hashtag(models.Model):
+
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
 
 
 class Tweet(models.Model):
@@ -48,6 +62,8 @@ class Tweet(models.Model):
     date = models.DateTimeField()
 
     created_at = models.DateTimeField(auto_now_add=True)
+
+    hashtags = models.ManyToManyField(Hashtag)
 
     def __str__(self):
         return '{} - {}'.format(
