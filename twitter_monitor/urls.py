@@ -22,4 +22,6 @@ urlpatterns = [
     url(r'^$',
         login_required(TemplateView.as_view(template_name='core/index.html')),
         name='home'),
+
+    url(r'^api/v1/monitor/', include('monitor.api.urls', namespace='monitor')),
 ]
