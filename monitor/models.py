@@ -1,5 +1,7 @@
 from django.db import models
 from monitor import enums
+from tweepy.error import TweepError
+from twitter_monitor.twitter_api import api
 
 
 class TwitterUser(models.Model):
@@ -14,6 +16,22 @@ class TwitterUser(models.Model):
 
     def __str__(self):
         return self.username
+
+    def update_status(self, status):
+        self.status = status
+        self.save()
+
+    def retrieve_tweets(self):
+        try:
+            user = api.get_user(self.username)
+            tweets = user.timeline(count=200)
+            for tweet in tweets:
+                Tweet.objects.create(
+                    user=self, text=tweet.text, date=tweet.created_at
+                )
+            self.update_status(enums.TwitterUserStatusEnum.VALID)
+        except TweepError:
+            self.update_status(enums.TwitterUserStatusEnum.INVALID)
 
 
 class Tweet(models.Model):
