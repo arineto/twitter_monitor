@@ -1,6 +1,8 @@
 [run]
 branch = True
-omit = */virtualenvs/*
+omit = */.virtualenvs/*
+       */virtualenvs/*
        */migrations/*
        */settings/*
        */tests/*
+       *test*

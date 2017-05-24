@@ -13,3 +13,6 @@ test:
 
 testreset:
 	python manage.py test $(ARG) --parallel
+
+coverage:
+	coverage run ./manage.py test $(ARG) --parallel --keepdb && coverage report

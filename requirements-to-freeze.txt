@@ -26,6 +26,8 @@ flake8<3
 flake8-putty
 isort
 safety
+mock
+tblib
 
 # local
 django-naomi
