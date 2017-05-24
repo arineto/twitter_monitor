@@ -1,44 +1,8 @@
 [![License: MIT](https://img.shields.io/github/license/vintasoftware/django-react-boilerplate.svg)](LICENSE.txt)
 
-# Django React Boilerplate
+# Twitter Monitor
 
-## About this boilerplate
-
-A Django 1.10 project boilerplate/template with lots of state of the art libraries and tools like:
-- React, for interactive UI development
-- django.js, for generating URLs on JS
-- Bootstrap 4, for responsive styling
-- Webpack, for bundling static assets
-- Celery, for background worker tasks
-- WhiteNoise with brotlipy, for efficient static files serving
-
-For continuous integration, a [CircleCI](https://circleci.com/) configuration `circle.yml` is included.
-
-Also, includes a Heroku `app.json` and a working Django `production.py` settings, enabling easy deployments with ['Deploy to Heroku' button](https://devcenter.heroku.com/articles/heroku-button). Those Heroku plugins are included in `app.json`:
-- PostgreSQL, for DB
-- Redis, for Celery
-- Sendgrid, for e-mail sending
-- Papertrail, for logs and platform errors alerts (must set them manually on papertrail).
-- Opbeat, for performance monitoring
-
-This should be enough as a starting point for any modern web project.
-
-## Project bootstrap [![CircleCI](https://circleci.com/gh/vintasoftware/django-react-boilerplate.svg?style=svg)](https://circleci.com/gh/vintasoftware/django-react-boilerplate)
-- [ ] Start your project using:
-```
-django-admin startproject theprojectname --extension py,yml,json --name Procfile --template=https://github.com/vintasoftware/django-react-boilerplate/archive/boilerplate-release.zip
-```
-- [ ] Above: don't forget the `--extension` and `--name` params!
-- [ ] `pip install -r requirements-to-freeze.txt`
-- [ ] `pip freeze > requirements.txt`
-- [ ] `npm update --save`
-- [ ] Remove the `^` from `"bootstrap": "^4.0.0-alpha.4"` in the package.json file. While bootstrap is in alpha we have decided to lock the version to alpha4 to avoid breakage
-- [ ] Check for outdated npm dependencies with `npm outdated` and update them
-- [ ] Change the first line of README to the name of the project
-- [ ] Add an email address to the `ADMINS` settings variable
-- [ ] Change the `SERVER_EMAIL` to the email address used to send e-mails.
-
-After completing ALL of the above, remove this `Project bootstrap` section from the project README.
+This project was built using the [Django React Boilerplate](https://github.com/vintasoftware/django-react-boilerplate).
 
 ### How to test `django-admin startproject`
 
@@ -95,8 +59,3 @@ Add high level dependecies to `requirements-to-freeze.txt` and `pip freeze > req
 
 - Run `pre-commit install` to enable the hook into your git repo. The hook will run automatically for each commit.
 - Run `git commit -m "Your message" -n` to skip the hook if you need.
-
-## Commercial Support
-This project, as other Vinta open-source projects, is used in products of Vinta clients. We are always looking for exciting work, so if you need any commercial support, feel free to get in touch: contact@vinta.com.br
-
-Copyright (c) 2017 Vinta Serviços e Soluções Tecnológicas Ltda

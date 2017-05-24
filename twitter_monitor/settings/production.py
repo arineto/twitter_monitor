@@ -21,7 +21,7 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = 'mediafiles'
 MEDIA_URL = '/media/'
 
-SERVER_EMAIL = 'foo@example.com'
+SERVER_EMAIL = 'arineto30@gmail.com'
 
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_HOST_USER = config('SENDGRID_USERNAME')
