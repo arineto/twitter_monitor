@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import HomePageReactTitle from '../components/HomePageReactTitle';
+import TweetsContainer from '../containers/tweets_container';
 
 
 // eslint-disable-next-line react/prefer-stateless-function
@@ -10,7 +10,7 @@ class AppRoutes extends React.Component {
     return (
       <BrowserRouter>
         <Switch>
-          <Route path="/" component={HomePageReactTitle} />
+          <Route path="/" component={TweetsContainer} />
         </Switch>
       </BrowserRouter>
     );
