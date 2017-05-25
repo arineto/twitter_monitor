@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 import { fetchTweet } from '../actions';
+import TitleRow from '../components/title_row';
+import TweetBox from '../components/tweet_box';
 
 
 class ReplyContainer extends React.Component {
@@ -11,37 +12,11 @@ class ReplyContainer extends React.Component {
     this.props.fetchTweet(this.props.match.params.tweet_id);
   }
 
-  renderTweet() {
-    const tweet = this.props.tweet;
-
-    return (
-      <div className="row">
-        <div className="col-sm-12">
-          <div className="tweet-box">
-            <p>@{tweet.username} - {tweet.created_at}</p>
-            <p>{tweet.text}</p>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   render() {
     return (
       <div>
-        <div className="row">
-          <div className="col-sm-6">
-            <h3>Reply</h3>
-          </div>
-
-          <div className="col-sm-6">
-            <Link className="btn btn-default pull-right" to="/">
-              Back
-            </Link>
-          </div>
-        </div>
-
-        {this.renderTweet()}
+        <TitleRow title="Reply" btn_class="default" btn_text="Back" url="/" />
+        <TweetBox tweet={this.props.tweet} />
       </div>
     );
   }

@@ -1,9 +1,9 @@
-import _ from 'lodash';
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 import { fetchUsers } from '../actions';
+import TitleRow from '../components/title_row';
+import UsersTable from '../components/users_table';
 
 
 class UsersContainer extends React.Component {
@@ -12,45 +12,11 @@ class UsersContainer extends React.Component {
     this.props.fetchUsers();
   }
 
-  renderUsers() {
-    return _.map(this.props.users, (user) => {
-      return (
-        <tr key={user.id}>
-          <td>{user.username}</td>
-          <td>{user.created_at}</td>
-          <td>{user.status}</td>
-        </tr>
-      );
-    });
-  }
-
   render() {
     return (
       <div>
-        <div className="row">
-          <div className="col-sm-6">
-            <h3>Users</h3>
-          </div>
-
-          <div className="col-sm-6">
-            <Link className="btn btn-default pull-right" to="/">
-              Back
-            </Link>
-          </div>
-        </div>
-        <table className="table table-striped">
-          <thead>
-            <tr>
-              <th>Username</th>
-              <th>Date</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.renderUsers()}
-          </tbody>
-        </table>
-
+        <TitleRow title="Users" btn_class="default" btn_text="Back" url="/" />
+        <UsersTable users={this.props.users} />
       </div>
     );
   }

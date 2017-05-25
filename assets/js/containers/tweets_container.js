@@ -1,9 +1,9 @@
-import _ from 'lodash';
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 import { fetchTweets } from '../actions';
+import TitleRow from '../components/title_row';
+import TweetsTable from '../components/tweets_table';
 
 
 class TweetsContainer extends React.Component {
@@ -12,51 +12,11 @@ class TweetsContainer extends React.Component {
     this.props.fetchTweets();
   }
 
-  renderTweets() {
-    return _.map(this.props.tweets, (tweet) => {
-      return (
-        <tr key={tweet.id}>
-          <td>{tweet.username}</td>
-          <td>{tweet.created_at}</td>
-          <td>{tweet.text}</td>
-          <td>
-            <Link className="btn btn-default pull-right" to={`/tweet/${tweet.id}`}>
-              Reply
-            </Link>
-          </td>
-        </tr>
-      );
-    });
-  }
-
   render() {
     return (
       <div>
-        <div className="row">
-          <div className="col-sm-6">
-            <h3>Tweets</h3>
-          </div>
-
-          <div className="col-sm-6">
-            <Link className="btn btn-primary pull-right" to="/users/">
-              Add an User
-            </Link>
-          </div>
-        </div>
-
-        <table className="table table-striped">
-          <thead>
-            <tr>
-              <th>User</th>
-              <th>Date</th>
-              <th>Text</th>
-              <th />
-            </tr>
-          </thead>
-          <tbody>
-            {this.renderTweets()}
-          </tbody>
-        </table>
+        <TitleRow title="Tweets" btn_class="primary" btn_text="Add an User" url="/users/" />
+        <TweetsTable tweets={this.props.tweets} />
       </div>
     );
   }
