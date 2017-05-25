@@ -16,7 +16,7 @@ class TweetsContainer extends React.Component {
     return _.map(this.props.tweets, (tweet) => {
       return (
         <tr key={tweet.id}>
-          <td>{tweet.user}</td>
+          <td>{tweet.username}</td>
           <td>{tweet.created_at}</td>
           <td>{tweet.text}</td>
         </tr>
