@@ -1,13 +1,8 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 
-const HomePageReactTitle = ({ title }) => {
+const HomePageReactTitle = () => {
   const homeURL = window.Django.url('home');
-
-  return <h2>{title} (this is page {homeURL})</h2>;
-};
-
-HomePageReactTitle.propTypes = {
-  title: PropTypes.string.isRequired,
+  return <h2>React is rendering this page (this is page {homeURL})</h2>;
 };
 
 export default HomePageReactTitle;
