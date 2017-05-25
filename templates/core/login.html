@@ -1,6 +1,25 @@
 {% extends 'base.html' %}
 
+{% block extra_css %}
+<style media="screen">
+    body {
+        padding-top: 40px;
+        padding-bottom: 40px;
+        background-color: #eee !important;
+    }
+    .form-signin {
+        text-align: center;
+        max-width: 330px;
+        padding: 15px;
+        margin: 0 auto;
+    }
+</style>
+{% endblock %}
+
 {% block body %}
-<h1>Login</h1>
-<a href="{% url 'social:begin' 'twitter' %}">Login with Twitter</a>
+    <div class="form-signin">
+        <h1>Twitter Monitor</h1>
+        <br>
+        <a class="btn btn-lg btn-primary btn-block" href="{% url 'social:begin' 'twitter' %}">Login with Twitter</a>
+    </div>
 {% endblock %}
