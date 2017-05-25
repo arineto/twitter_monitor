@@ -7,6 +7,6 @@ urlpatterns = [
     url(r'tweets/$', views.TweetListView.as_view(), name='tweets'),
     url(r'usernames/$', views.UsernameListView.as_view(), name='usernames'),
     url(r'hashtags/$', views.HashtagListView.as_view(), name='hashtags'),
-    url(r'tweet/(?P<pk>\d+)$', views.TweetRetrieveView.as_view(),
+    url(r'tweet/(?P<pk>\d+)/$', views.TweetRetrieveView.as_view(),
         name='tweet'),
 ]

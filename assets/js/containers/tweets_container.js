@@ -19,6 +19,11 @@ class TweetsContainer extends React.Component {
           <td>{tweet.username}</td>
           <td>{tweet.created_at}</td>
           <td>{tweet.text}</td>
+          <td>
+            <Link className="btn btn-default pull-right" to={`/tweet/${tweet.id}`}>
+              Reply
+            </Link>
+          </td>
         </tr>
       );
     });
@@ -45,6 +50,7 @@ class TweetsContainer extends React.Component {
               <th>User</th>
               <th>Date</th>
               <th>Text</th>
+              <th />
             </tr>
           </thead>
           <tbody>
