@@ -3,22 +3,22 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { fetchTweets } from '../actions';
+import { fetchUsers } from '../actions';
 
 
-class TweetsContainer extends React.Component {
+class UsersContainer extends React.Component {
 
   componentDidMount() {
-    this.props.fetchTweets();
+    this.props.fetchUsers();
   }
 
-  renderTweets() {
-    return _.map(this.props.tweets, (tweet) => {
+  renderUsers() {
+    return _.map(this.props.users, (user) => {
       return (
-        <tr key={tweet.id}>
-          <td>{tweet.user}</td>
-          <td>{tweet.created_at}</td>
-          <td>{tweet.text}</td>
+        <tr key={user.id}>
+          <td>{user.username}</td>
+          <td>{user.created_at}</td>
+          <td>{user.status}</td>
         </tr>
       );
     });
@@ -29,35 +29,35 @@ class TweetsContainer extends React.Component {
       <div>
         <div className="row">
           <div className="col-sm-6">
-            <h3>Tweets</h3>
+            <h3>Users</h3>
           </div>
 
           <div className="col-sm-6">
-            <Link className="btn btn-primary pull-right" to="/users/">
-              Add an User
+            <Link className="btn btn-default pull-right" to="/">
+              Back
             </Link>
           </div>
         </div>
-
         <table className="table table-striped">
           <thead>
             <tr>
-              <th>User</th>
+              <th>Username</th>
               <th>Date</th>
-              <th>Text</th>
+              <th>Status</th>
             </tr>
           </thead>
           <tbody>
-            {this.renderTweets()}
+            {this.renderUsers()}
           </tbody>
         </table>
+
       </div>
     );
   }
 }
 
 function mapStateToProps(state) {
-  return { tweets: state.tweets };
+  return { users: state.users };
 }
 
-export default connect(mapStateToProps, { fetchTweets })(TweetsContainer);
+export default connect(mapStateToProps, { fetchUsers })(UsersContainer);
