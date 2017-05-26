@@ -24,7 +24,6 @@ class TweetsContainer extends React.Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state);
   return { tweets: state.tweets };
 }
 

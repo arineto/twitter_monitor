@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { fetchUsers } from '../actions';
 import TitleRow from '../components/title_row';
 import UsersTable from '../components/users_table';
+import UserForm from '../containers/user_form_container';
 
 
 class UsersContainer extends React.Component {
@@ -16,6 +17,7 @@ class UsersContainer extends React.Component {
     return (
       <div>
         <TitleRow title="Users" btn_class="default" btn_text="Back" url="/" />
+        <UserForm />
         <UsersTable users={this.props.users} />
       </div>
     );
@@ -23,7 +25,9 @@ class UsersContainer extends React.Component {
 }
 
 function mapStateToProps(state) {
-  return { users: state.users };
+  return {
+    users: state.users,
+  };
 }
 
 export default connect(mapStateToProps, { fetchUsers })(UsersContainer);
