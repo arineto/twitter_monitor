@@ -5,3 +5,4 @@ export const FETCH_TWEET = 'FETCH_TWEET';
 export const FETCH_TOKEN = 'FETCH_TOKEN';
 export const SUBMIT_USER = 'SUBMIT_USER';
 export const REPLY_TWEET = 'REPLY_TWEET';
+export const FETCH_REPLIES = 'FETCH_REPLIES';

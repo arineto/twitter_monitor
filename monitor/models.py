@@ -19,6 +19,10 @@ class TwitterUser(models.Model):
     def __str__(self):
         return self.username
 
+    @property
+    def status_text(self):
+        return self.get_status_display()
+
     def update_status(self, status):
         self.status = status
         self.save()

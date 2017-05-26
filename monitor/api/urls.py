@@ -11,4 +11,6 @@ urlpatterns = [
     url(r'tweet/(?P<pk>\d+)/$', views.TweetRetrieveView.as_view(),
         name='tweet'),
     url(r'reply/(?P<pk>\d+)/$', views.TweetReplyView.as_view(), name='reply'),
+    url(r'replies/(?P<pk>\d+)/$', views.TweetResponseListView.as_view(),
+        name='replies'),
 ]
