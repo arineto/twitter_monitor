@@ -3,6 +3,7 @@ from monitor.api import views
 
 
 urlpatterns = [
+    url(r'token/$', views.TokenRetrieveView.as_view(), name='token'),
     url(r'users/$', views.TwitterUserView.as_view(), name='users'),
     url(r'tweets/$', views.TweetListView.as_view(), name='tweets'),
     url(r'usernames/$', views.UsernameListView.as_view(), name='usernames'),

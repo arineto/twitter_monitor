@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { API_URL, FETCH_TWEETS, FETCH_USERS, FETCH_TWEET } from '../constants';
+import { API_URL, FETCH_TWEETS, FETCH_USERS, FETCH_TWEET, FETCH_TOKEN } from '../constants';
 
 
 export function fetchTweets() {
@@ -27,6 +27,15 @@ export function fetchTweet(tweetId) {
 
   return {
     type: FETCH_TWEET,
+    payload: request,
+  };
+}
+
+export function fetchToken() {
+  const request = axios.get(`${API_URL}token/`);
+
+  return {
+    type: FETCH_TOKEN,
     payload: request,
   };
 }

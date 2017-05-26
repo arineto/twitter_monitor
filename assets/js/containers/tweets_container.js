@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { fetchTweets } from '../actions';
+import { fetchTweets, fetchToken } from '../actions';
 import TitleRow from '../components/title_row';
 import TweetsTable from '../components/tweets_table';
 
@@ -10,6 +10,7 @@ class TweetsContainer extends React.Component {
 
   componentDidMount() {
     this.props.fetchTweets();
+    this.props.fetchToken();
   }
 
   render() {
@@ -23,7 +24,8 @@ class TweetsContainer extends React.Component {
 }
 
 function mapStateToProps(state) {
+  console.log(state);
   return { tweets: state.tweets };
 }
 
-export default connect(mapStateToProps, { fetchTweets })(TweetsContainer);
+export default connect(mapStateToProps, { fetchTweets, fetchToken })(TweetsContainer);
