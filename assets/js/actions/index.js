@@ -53,3 +53,18 @@ export function submitUser(data, token, callback) {
     payload: request,
   };
 }
+
+export function replyTweet(tweetId, data, token, callback) {
+  const request = postData(
+    `${API_URL}reply/${tweetId}/`, data, token
+  ).then(
+    () => {
+      callback();
+    }
+  );
+
+  return {
+    type: SUBMIT_USER,
+    payload: request,
+  };
+}

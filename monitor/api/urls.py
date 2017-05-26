@@ -10,4 +10,5 @@ urlpatterns = [
     url(r'hashtags/$', views.HashtagListView.as_view(), name='hashtags'),
     url(r'tweet/(?P<pk>\d+)/$', views.TweetRetrieveView.as_view(),
         name='tweet'),
+    url(r'reply/(?P<pk>\d+)/$', views.TweetReplyView.as_view(), name='reply'),
 ]

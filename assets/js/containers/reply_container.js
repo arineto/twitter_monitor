@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { fetchTweet } from '../actions';
 import TitleRow from '../components/title_row';
 import TweetBox from '../components/tweet_box';
+import ReplyForm from '../containers/reply_form_container';
 
 
 class ReplyContainer extends React.Component {
@@ -15,8 +16,9 @@ class ReplyContainer extends React.Component {
   render() {
     return (
       <div>
-        <TitleRow title="Reply" btn_class="default" btn_text="Back" url="/" />
+        <TitleRow title="Reply" btn_id="back_btn" btn_class="default" btn_text="Back" url="/" />
         <TweetBox tweet={this.props.tweet} />
+        <ReplyForm tweet={this.props.tweet} />
       </div>
     );
   }

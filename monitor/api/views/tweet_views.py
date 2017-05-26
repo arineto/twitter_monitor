@@ -8,7 +8,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 
-__all__ = ['TweetListView', 'TweetRetrieveView']
+__all__ = ['TweetListView', 'TweetRetrieveView', 'TweetReplyView']
 
 
 class TweetListView(ListAPIView):
