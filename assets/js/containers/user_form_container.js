@@ -19,7 +19,11 @@ class UserForm extends Component {
 
   onFormSubmit(event) {
     event.preventDefault();
-    this.props.submitUser({ username: this.state.username }, this.props.token.key);
+
+    const values = { username: this.state.username };
+    this.props.submitUser(values, this.props.token.key, () => {
+      document.getElementById("back_btn").click();
+    });
   }
 
   render() {
@@ -30,6 +34,7 @@ class UserForm extends Component {
             <input
               value={this.state.username} placeholder="Username"
               className="form-control" onChange={this.onInputChange}
+              required="True"
             />
           </div>
           <div className="col-sm-1">

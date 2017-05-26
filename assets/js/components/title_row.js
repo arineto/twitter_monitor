@@ -15,7 +15,7 @@ class TitleRow extends React.Component {
         </div>
 
         <div className="col-sm-6">
-          <Link className={btnClass} to={this.props.url}>
+          <Link id={this.props.btn_id} className={btnClass} to={this.props.url}>
             {this.props.btn_text}
           </Link>
         </div>

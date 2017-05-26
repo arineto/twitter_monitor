@@ -16,7 +16,7 @@ class UsersContainer extends React.Component {
   render() {
     return (
       <div>
-        <TitleRow title="Users" btn_class="default" btn_text="Back" url="/" />
+        <TitleRow title="Users" btn_id="back_btn" btn_class="default" btn_text="Back" url="/" />
         <UserForm />
         <UsersTable users={this.props.users} />
       </div>

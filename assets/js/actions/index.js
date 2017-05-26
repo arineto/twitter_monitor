@@ -1,5 +1,5 @@
 import { getData, postData } from '../utils';
-import { API_URL, FETCH_TWEETS, FETCH_USERS, FETCH_TWEET, FETCH_TOKEN } from '../constants';
+import { API_URL, FETCH_TWEETS, FETCH_USERS, FETCH_TWEET, FETCH_TOKEN, SUBMIT_USER } from '../constants';
 
 
 export function fetchTweets() {
@@ -39,9 +39,17 @@ export function fetchToken() {
   };
 }
 
-export function submitUser(data, token) {
-  const request = postData(`${API_URL}users/`, data, token);
-  request.then(() => {
-    fetchUsers();
-  });
+export function submitUser(data, token, callback) {
+  const request = postData(
+    `${API_URL}users/`, data, token
+  ).then(
+    () => {
+      callback();
+    }
+  );
+
+  return {
+    type: SUBMIT_USER,
+    payload: request,
+  };
 }
