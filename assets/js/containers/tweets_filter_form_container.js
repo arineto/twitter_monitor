@@ -33,7 +33,7 @@ class TweetsFilterForm extends Component {
           options={this.renderUsernameOptions()}
           onChange={
             (option) => {
-              this.setState({ username: option == null ? '' : option.value })
+              this.setState({ username: option == null ? '' : option.value });
             }
           }
         />
@@ -43,7 +43,7 @@ class TweetsFilterForm extends Component {
 
   renderDateField() {
     return (
-      <div className="">
+      <div className="col-sm-3">
         <DateRangePicker
           startDate={this.state.startDate}
           endDate={this.state.endDate}
@@ -55,10 +55,22 @@ class TweetsFilterForm extends Component {
     );
   }
 
+  renderTermField() {
+    return (
+      <div className="col-sm-3">
+        <input
+          type="text" placeholder="Term" className="form-control" value={this.state.term}
+          onChange={(event) => { this.setState({ term: event.target.value }); }}
+        />
+      </div>
+    );
+  }
+
   render() {
     return (
       <div className="form row">
         {this.renderUsernameField()}
+        {this.renderTermField()}
         {this.renderDateField()}
       </div>
     );
