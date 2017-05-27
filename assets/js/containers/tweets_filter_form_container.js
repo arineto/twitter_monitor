@@ -1,7 +1,8 @@
 import _ from 'lodash';
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { DateRangePicker } from 'react-dates';
+import React, { Component } from 'react';
 import Select from 'react-select';
 
 import { fetchUsernames } from '../actions/index';
@@ -11,31 +12,44 @@ class TweetsFilterForm extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { username: '' };
-    this.onInputChange = this.onInputChange.bind(this);
+    this.state = { username: '', startDate: null, endDate: null };
   }
 
   componentDidMount() {
     this.props.fetchUsernames();
   }
 
-  onInputChange(option) {
-    const value = option == null ? '' : option.value;
-    this.setState({ username: value });
-  }
-
-  renderUsernamesOptions() {
+  renderUsernameOptions() {
     return _.map(this.props.usernames, (user) => {
       return { value: user.id, label: user.username }
     });
   }
 
-  renderUsernames() {
+  renderUsernameField() {
     return (
-      <div className="col-sm-6 input-group">
+      <div className="col-sm-3">
         <Select
           name="username" placeholder="Username" value={this.state.username}
-          options={this.renderUsernamesOptions()} onChange={this.onInputChange}
+          options={this.renderUsernameOptions()}
+          onChange={
+            (option) => {
+              this.setState({ username: option == null ? '' : option.value })
+            }
+          }
+        />
+      </div>
+    );
+  }
+
+  renderDateField() {
+    return (
+      <div className="">
+        <DateRangePicker
+          startDate={this.state.startDate}
+          endDate={this.state.endDate}
+          onDatesChange={({ startDate, endDate }) => this.setState({ startDate, endDate })}
+          focusedInput={this.state.focusedInput}
+          onFocusChange={focusedInput => this.setState({ focusedInput })}
         />
       </div>
     );
@@ -43,8 +57,9 @@ class TweetsFilterForm extends Component {
 
   render() {
     return (
-      <div className="form">
-        {this.renderUsernames()}
+      <div className="form row">
+        {this.renderUsernameField()}
+        {this.renderDateField()}
       </div>
     );
   }
