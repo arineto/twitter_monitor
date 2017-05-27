@@ -11,7 +11,7 @@ class TweetsTable extends React.Component {
       return (
         <tr key={tweet.id}>
           <td>{tweet.username}</td>
-          <td>{tweet.created_at}</td>
+          <td>{tweet.date}</td>
           <td>{tweet.text}</td>
           <td>
             <Link className="btn btn-default pull-right" to={`/tweet/${tweet.id}`}>
