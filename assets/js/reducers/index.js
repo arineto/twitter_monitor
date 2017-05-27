@@ -5,6 +5,7 @@ import TweetReducer from './reducer_tweet';
 import TokenReducer from './reducer_token';
 import RepliesReducer from './reducer_replies';
 import UsernamesReducer from './reducer_usernames';
+import HashtagsReducer from './reducer_hashtags';
 
 const rootReducer = combineReducers({
   tweets: TweetsReducer,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   token: TokenReducer,
   replies: RepliesReducer,
   usernames: UsernamesReducer,
+  hashtags: HashtagsReducer,
 });
 
 export default rootReducer;

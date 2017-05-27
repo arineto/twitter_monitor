@@ -7,3 +7,4 @@ export const SUBMIT_USER = 'SUBMIT_USER';
 export const REPLY_TWEET = 'REPLY_TWEET';
 export const FETCH_REPLIES = 'FETCH_REPLIES';
 export const FETCH_USERNAMES = 'FETCH_USERNAMES';
+export const FETCH_HASHTAGS = 'FETCH_HASHTAGS';

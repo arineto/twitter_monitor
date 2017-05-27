@@ -5,18 +5,21 @@ import { DateRangePicker } from 'react-dates';
 import React, { Component } from 'react';
 import Select from 'react-select';
 
-import { fetchUsernames } from '../actions/index';
+import { fetchUsernames, fetchHashtags } from '../actions/index';
 
 
 class TweetsFilterForm extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { username: '', startDate: null, endDate: null };
+    this.state = {
+      username: '', startDate: null, endDate: null, term: '', hashtags: [],
+    };
   }
 
   componentDidMount() {
     this.props.fetchUsernames();
+    this.props.fetchHashtags();
   }
 
   renderUsernameOptions() {
@@ -25,15 +28,21 @@ class TweetsFilterForm extends Component {
     });
   }
 
+  renderHashtagsOptions() {
+    return _.map(this.props.hashtags, (hashtag) => {
+      return { value: hashtag.id, label: hashtag.name }
+    });
+  }
+
   renderUsernameField() {
     return (
-      <div className="col-sm-3">
+      <div className="col-sm-2">
         <Select
           name="username" placeholder="Username" value={this.state.username}
           options={this.renderUsernameOptions()}
           onChange={
-            (option) => {
-              this.setState({ username: option == null ? '' : option.value });
+            (username) => {
+              this.setState({ username });
             }
           }
         />
@@ -66,12 +75,33 @@ class TweetsFilterForm extends Component {
     );
   }
 
+  renderHashtagsField() {
+    return (
+      <div className="col-sm-3">
+        <Select
+          name="hashtags" placeholder="Hashtags" value={this.state.hashtags}
+          multi={true} options={this.renderHashtagsOptions()}
+          onChange={
+            (hashtags) => {
+              console.log(hashtags);
+              this.setState({ hashtags });
+            }
+          }
+        />
+      </div>
+    );
+  }
+
   render() {
     return (
       <div className="form row">
         {this.renderUsernameField()}
         {this.renderTermField()}
+        {this.renderHashtagsField()}
         {this.renderDateField()}
+        <div className="pull-right">
+          <button type="submit" className="btn btn-primary pull-right">Filter</button>
+        </div>
       </div>
     );
   }
@@ -81,11 +111,12 @@ class TweetsFilterForm extends Component {
 function mapStateToProps(state) {
   return {
     usernames: state.usernames,
+    hashtags: state.hashtags,
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchUsernames }, dispatch);
+  return bindActionCreators({ fetchUsernames, fetchHashtags }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TweetsFilterForm);
