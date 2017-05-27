@@ -9,7 +9,7 @@ from .managers import UserManager
 
 class User(AbstractBaseUser, PermissionsMixin, IndexedTimeStampedModel):
     username = models.CharField(max_length=255, unique=True, null=True)
-    email = models.EmailField(max_length=255, unique=True)
+    email = models.EmailField(max_length=255)
     is_staff = models.BooleanField(
         default=False,
         help_text=_('Designates whether the user can log into this admin '
@@ -21,7 +21,7 @@ class User(AbstractBaseUser, PermissionsMixin, IndexedTimeStampedModel):
 
     objects = UserManager()
 
-    USERNAME_FIELD = 'email'
+    USERNAME_FIELD = 'username'
 
     def get_full_name(self):
         return self.username or self.email
