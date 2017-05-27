@@ -1,7 +1,7 @@
 import { getData, postData } from '../utils';
 import {
   API_URL, FETCH_TWEETS, FETCH_USERS, FETCH_TWEET,
-  FETCH_TOKEN, SUBMIT_USER, FETCH_REPLIES,
+  FETCH_TOKEN, SUBMIT_USER, FETCH_REPLIES, FETCH_USERNAMES,
 } from '../constants';
 
 
@@ -77,6 +77,15 @@ export function fetchReplies(tweetId) {
 
   return {
     type: FETCH_REPLIES,
+    payload: request,
+  };
+}
+
+export function fetchUsernames() {
+  const request = getData(`${API_URL}usernames/`);
+
+  return {
+    type: FETCH_USERNAMES,
     payload: request,
   };
 }
