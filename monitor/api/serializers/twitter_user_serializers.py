@@ -13,7 +13,8 @@ class TwitterUserSerializer(ModelSerializer):
 
     def create(self, validated_data):
         instance = super(TwitterUserSerializer, self).create(validated_data)
-        instance.retrieve_tweets()
+        user = self.context.get('request').user
+        instance.retrieve_tweets(user)
         return instance
 
 

@@ -9,6 +9,15 @@ class TestTweet(TestCase):
     def setUp(self):
         self.user = mommy.make('users.User')
         self.tweet = mommy.make('monitor.Tweet', tweet_id='123')
+        self.social_user = mommy.make(
+            'social_django.UserSocialAuth', user=self.user,
+            extra_data={
+                'access_token': {
+                    'oauth_token': '',
+                    'oauth_token_secret': ''
+                }
+            }
+        )
 
     def test__str__(self):
         self.assertEqual(
@@ -19,7 +28,7 @@ class TestTweet(TestCase):
         )
 
     def test_reply(self):
-        with patch('monitor.models.api', APIMock()):
+        with patch('monitor.models.get_api', APIMock):
             self.assertFalse(self.tweet.tweetresponse_set.exists())
             self.tweet.reply(self.user, 'test reply')
             self.assertTrue(self.tweet.tweetresponse_set.exists())

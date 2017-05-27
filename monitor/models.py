@@ -1,7 +1,7 @@
 from django.db import models
 from monitor import enums
 from tweepy.error import TweepError
-from twitter_monitor.twitter_api import api
+from twitter_monitor.twitter_api import get_api
 
 
 class TwitterUser(models.Model):
@@ -27,10 +27,17 @@ class TwitterUser(models.Model):
         self.status = status
         self.save()
 
-    def retrieve_tweets(self):
+    def retrieve_tweets(self, user):
         try:
+            social_user = user.social_auth.get()
+            api = get_api(
+                social_user.extra_data['access_token']['oauth_token'],
+                social_user.extra_data['access_token']['oauth_token_secret']
+            )
+
             user = api.get_user(self.username)
             tweets = user.timeline(count=200)
+
             for tweet in tweets:
                 tweet_obj = Tweet.objects.create(
                     tweet_id=tweet.id, user=self, text=tweet.text,
@@ -75,7 +82,15 @@ class Tweet(models.Model):
         )
 
     def reply(self, user, text):
-        tweet = api.update_status(text, in_reply_to_status_id=self.tweet_id)
+        social_user = user.social_auth.get()
+        api = get_api(
+            social_user.extra_data['access_token']['oauth_token'],
+            social_user.extra_data['access_token']['oauth_token_secret']
+        )
+
+        message = '@{} {}'.format(self.user.username, text)
+        tweet = api.update_status(message, self.tweet_id)
+
         TweetResponse.objects.create(
             response_id=tweet.id, user=user, tweet=self, text=text
         )

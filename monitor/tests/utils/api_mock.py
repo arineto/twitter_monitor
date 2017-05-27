@@ -6,6 +6,9 @@ from tweepy.error import TweepError
 
 class APIMock:
 
+    def __init__(self, *args, **kwargs):
+        super(APIMock, self).__init__()
+
     def get_user(self, username):
         return UserMock()
 
@@ -33,6 +36,9 @@ class TweetMock:
 
 
 class APIMockError:
+
+    def __init__(self, *args, **kwargs):
+        super(APIMockError, self).__init__()
 
     def get_user(self, username):
         raise TweepError('')

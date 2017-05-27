@@ -9,6 +9,16 @@ class TestTwitterUser(TestCase):
 
     def setUp(self):
         self.user = mommy.make('monitor.TwitterUser', username='test')
+        self.auth_user = mommy.make('users.User')
+        self.social_user = mommy.make(
+            'social_django.UserSocialAuth', user=self.auth_user,
+            extra_data={
+                'access_token': {
+                    'oauth_token': '',
+                    'oauth_token_secret': ''
+                }
+            }
+        )
 
     def test__str__(self):
         self.assertEqual(str(self.user), 'test')
@@ -23,18 +33,12 @@ class TestTwitterUser(TestCase):
         self.assertEqual(self.user.status, TwitterUserStatusEnum.INVALID)
 
     def test_retrieve_tweets(self):
-        with patch('monitor.models.api', APIMock()) as api_mock:
-            self.user.retrieve_tweets()
+        with patch('monitor.models.get_api', APIMock):
+            self.user.retrieve_tweets(self.auth_user)
             self.assertEqual(self.user.tweet_set.count(), 5)
-
-            for tweet in api_mock.get_user('').timeline(1):
-                self.assertTrue(
-                    self.user.tweet_set.filter(tweet_id=tweet.id).exists()
-                )
-
             self.assertEqual(self.user.status, TwitterUserStatusEnum.VALID)
 
     def test_retrieve_tweets_error(self):
-        with patch('monitor.models.api', APIMockError()):
-            self.user.retrieve_tweets()
+        with patch('monitor.models.get_api', APIMockError):
+            self.user.retrieve_tweets(self.auth_user)
             self.assertEqual(self.user.status, TwitterUserStatusEnum.INVALID)
