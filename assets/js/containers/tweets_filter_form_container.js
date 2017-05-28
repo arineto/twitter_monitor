@@ -92,6 +92,7 @@ class TweetsFilterForm extends Component {
         <DateRangePicker
           startDate={this.state.startDate}
           endDate={this.state.endDate}
+          isOutsideRange={() => false}
           onDatesChange={({ startDate, endDate }) => this.setState({ startDate, endDate })}
           focusedInput={this.state.focusedInput}
           onFocusChange={focusedInput => this.setState({ focusedInput })}

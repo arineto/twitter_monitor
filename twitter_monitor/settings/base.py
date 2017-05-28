@@ -96,7 +96,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ),
-    'DATETIME_FORMAT': "%d/%m/%Y %H:%M",
+    'DATETIME_FORMAT': "%m/%d/%Y %H:%M",
 }
 
 AUTHENTICATION_BACKENDS = (
