@@ -42,3 +42,9 @@ class APIMockError:
 
     def get_user(self, username):
         raise TweepError('')
+
+
+class RequestMock:
+
+    def __init__(self, user):
+        self.user = user
