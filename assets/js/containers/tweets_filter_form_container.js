@@ -13,13 +13,49 @@ class TweetsFilterForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '', startDate: null, endDate: null, term: '', hashtags: [],
+      username: null, startDate: null, endDate: null, term: '', hashtags: [],
     };
+    this.onFormSubmit = this.onFormSubmit.bind(this);
   }
 
   componentDidMount() {
     this.props.fetchUsernames();
     this.props.fetchHashtags();
+  }
+
+  onFormSubmit(event) {
+    event.preventDefault();
+
+    const { username, startDate, endDate, term, hashtags } = this.state;
+
+    let querystring = '';
+
+    if (username) {
+      querystring = `${querystring}username=${username.value}&`;
+    }
+
+    if (startDate) {
+      const startDateStr = startDate._d.toISOString().substring(0, 10);
+      querystring = `${querystring}start_date=${startDateStr}&`;
+    }
+
+    if (endDate) {
+      const endDateStr = endDate._d.toISOString().substring(0, 10);
+      querystring = `${querystring}end_date=${endDateStr}&`;
+    }
+
+    if (term) {
+      querystring = `${querystring}term=${term}&`;
+    }
+
+    const hashtagsList = _.map(this.state.hashtags, (hashtag) => {
+      return hashtag.value;
+    });
+    if (hashtagsList.length !== 0) {
+      querystring = `${querystring}hashtags=${hashtagsList}`;
+    }
+
+    this.props.handler(querystring);
   }
 
   renderUsernameOptions() {
@@ -83,7 +119,6 @@ class TweetsFilterForm extends Component {
           multi={true} options={this.renderHashtagsOptions()}
           onChange={
             (hashtags) => {
-              console.log(hashtags);
               this.setState({ hashtags });
             }
           }
@@ -94,7 +129,7 @@ class TweetsFilterForm extends Component {
 
   render() {
     return (
-      <div className="form row">
+      <form className="form row" onSubmit={this.onFormSubmit}>
         {this.renderUsernameField()}
         {this.renderTermField()}
         {this.renderHashtagsField()}
@@ -102,7 +137,7 @@ class TweetsFilterForm extends Component {
         <div className="pull-right">
           <button type="submit" className="btn btn-primary pull-right">Filter</button>
         </div>
-      </div>
+      </form>
     );
   }
 

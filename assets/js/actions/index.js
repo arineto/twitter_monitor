@@ -6,8 +6,14 @@ import {
 } from '../constants';
 
 
-export function fetchTweets() {
-  const request = getData(`${API_URL}tweets/`);
+export function fetchTweets(querystring) {
+  let url = `${API_URL}tweets/`;
+
+  if (querystring) {
+    url = `${url}?${querystring}`;
+  }
+
+  const request = getData(url);
 
   return {
     type: FETCH_TWEETS,

@@ -9,16 +9,30 @@ import TweetsFilterForm from './tweets_filter_form_container';
 
 class TweetsContainer extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.formHandler = this.formHandler.bind(this);
+  }
+
   componentDidMount() {
-    this.props.fetchTweets();
+    this.props.fetchTweets(null);
     this.props.fetchToken();
+  }
+
+  formHandler(querystring) {
+    this.props.fetchTweets(querystring)
+      .then(
+        (response) => {
+          this.setState({ tweets: response.payload.data });
+        }
+      );
   }
 
   render() {
     return (
       <div>
         <TitleRow title="Tweets" btn_class="primary" btn_text="Add an User" url="/users/" />
-        <TweetsFilterForm />
+        <TweetsFilterForm handler={this.formHandler} />
         <TweetsTable tweets={this.props.tweets} />
       </div>
     );
