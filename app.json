@@ -19,6 +19,12 @@
     "SECRET_KEY": {
       "description": "Django SECRET_KEY setting",
       "generator": "secret"
+    },
+    "SOCIAL_AUTH_TWITTER_KEY": {
+      "description": "Twitter consumer key"
+    },
+    "SOCIAL_AUTH_TWITTER_SECRET": {
+      "description": "Twitter consumer key secret"
     }
   },
   "formation": {
@@ -51,9 +57,6 @@
     },
     {
       "plan": "papertrail:choklad"
-    },
-    {
-      "plan": "opbeat:test"
     }
   ],
   "buildpacks": [
