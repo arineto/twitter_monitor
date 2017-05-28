@@ -18,7 +18,12 @@ class ReplyContainer extends React.Component {
   }
 
   formHandler() {
-    this.props.history.push('/');
+    this.props.fetchReplies(this.props.tweet.id)
+      .then(
+        (response) => {
+          this.setState({ replies: response.payload.data });
+        }
+      );
   }
 
   renderReplies() {

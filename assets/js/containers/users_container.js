@@ -15,7 +15,12 @@ class UsersContainer extends React.Component {
   }
 
   formHandler() {
-    this.props.history.push('/');
+    this.props.fetchUsers()
+      .then(
+        (response) => {
+          this.setState({ users: response.payload.data });
+        }
+      );
   }
 
   render() {
