@@ -11,13 +11,18 @@ class UsersContainer extends React.Component {
 
   componentDidMount() {
     this.props.fetchUsers();
+    this.formHandler = this.formHandler.bind(this);
+  }
+
+  formHandler() {
+    this.props.history.push('/');
   }
 
   render() {
     return (
       <div>
         <TitleRow title="Users" btn_id="back_btn" btn_class="default" btn_text="Back" url="/" />
-        <UserForm />
+        <UserForm  handler={this.formHandler}/>
         <UsersTable users={this.props.users} />
       </div>
     );

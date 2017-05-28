@@ -14,6 +14,11 @@ class ReplyContainer extends React.Component {
   componentDidMount() {
     this.props.fetchTweet(this.props.match.params.tweet_id);
     this.props.fetchReplies(this.props.match.params.tweet_id);
+    this.formHandler = this.formHandler.bind(this);
+  }
+
+  formHandler() {
+    this.props.history.push('/');
   }
 
   renderReplies() {
@@ -31,7 +36,7 @@ class ReplyContainer extends React.Component {
       <div>
         <TitleRow title="Reply" btn_id="back_btn" btn_class="default" btn_text="Back" url="/" />
         <TweetBox tweet={this.props.tweet} />
-        <ReplyForm tweet={this.props.tweet} />
+        <ReplyForm tweet={this.props.tweet} handler={this.formHandler} />
         <h3>Replies</h3>
         {this.renderReplies()}
       </div>

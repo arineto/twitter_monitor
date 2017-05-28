@@ -22,7 +22,7 @@ class UserForm extends Component {
 
     const values = { username: this.state.username };
     this.props.submitUser(values, this.props.token.key, () => {
-      document.getElementById("back_btn").click();
+      this.props.handler();
     });
   }
 

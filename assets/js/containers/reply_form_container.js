@@ -22,7 +22,7 @@ class ReplyForm extends Component {
 
     const values = { text: this.state.text };
     this.props.replyTweet(this.props.tweet.id, values, this.props.token.key, () => {
-      document.getElementById("back_btn").click();
+      this.props.handler();
     });
   }
 
