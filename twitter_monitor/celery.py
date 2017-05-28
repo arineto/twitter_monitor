@@ -9,7 +9,9 @@ from django.apps import apps
 from celery import Celery
 
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "twitter_monitor.settings.local")
+os.environ.setdefault(
+    "DJANGO_SETTINGS_MODULE", "twitter_monitor.settings.production"
+)
 
 app = Celery('twitter_monitor_tasks')
 app.config_from_object('django.conf:settings', namespace='CELERY')

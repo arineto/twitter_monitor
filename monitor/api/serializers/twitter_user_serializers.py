@@ -1,4 +1,5 @@
 from monitor.models import TwitterUser
+from monitor.tasks import retrieve_tweets
 from rest_framework.serializers import ModelSerializer
 
 
@@ -14,7 +15,7 @@ class TwitterUserSerializer(ModelSerializer):
     def create(self, validated_data):
         instance = super(TwitterUserSerializer, self).create(validated_data)
         user = self.context.get('request').user
-        instance.retrieve_tweets(user)
+        retrieve_tweets.delay(instance.id, user.id)
         return instance
 
 
