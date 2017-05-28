@@ -65,7 +65,7 @@ class TweetReplyView(APIView):
     def post(self, request, *args, **kwargs):
         try:
             tweet = Tweet.objects.get(pk=kwargs.get('pk'))
-            data = request.data
+            data = request.data.copy()
             data.update({
                 'user': request.user.pk,
                 'tweet': tweet.pk
